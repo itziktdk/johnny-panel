@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JohnnyPanel 🧭</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Heebo', sans-serif; background: #1a202c; color: #e2e8f0; min-height: 100vh; }
+        
+        header { text-align: center; padding: 3rem 1rem 1.5rem; background: linear-gradient(135deg, #2D3748 0%, #1a202c 100%); }
+        header h1 { font-size: 2.5rem; font-weight: 900; background: linear-gradient(90deg, #FFD700, #FF6B6B, #4ECDC4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        header p { color: #a0aec0; font-size: 1.1rem; margin-top: 0.5rem; }
+
+        .tabs { display: flex; justify-content: center; gap: 1rem; padding: 1.5rem 1rem 0; flex-wrap: wrap; }
+        .tab { padding: 0.7rem 1.5rem; border-radius: 999px; border: 2px solid #4a5568; background: transparent; color: #a0aec0; font-family: 'Heebo', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+        .tab:hover { border-color: #4ECDC4; color: #4ECDC4; }
+        .tab.active { background: #4ECDC4; color: #1a202c; border-color: #4ECDC4; font-weight: 700; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; padding: 2rem 2rem 3rem; max-width: 1200px; margin: 0 auto; }
+
+        .card { background: #2D3748; border: 1px solid #4a5568; border-radius: 16px; padding: 1.5rem; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; gap: 0.75rem; }
+        .card:hover { transform: translateY(-4px); border-color: #4ECDC4; }
+        .card-emoji { font-size: 2.5rem; }
+        .card-name { font-size: 1.3rem; font-weight: 700; color: #fff; }
+        .card-desc { color: #a0aec0; font-size: 0.95rem; line-height: 1.5; }
+        
+        .status { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 500; }
+        .status-live { color: #48bb78; }
+        .status-protected { color: #FFD700; }
+        .status-backend { color: #ecc94b; }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+        .tech-tag { background: #4a5568; color: #e2e8f0; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
+
+        .card-link { display: inline-block; margin-top: 0.5rem; padding: 0.5rem 1.2rem; background: linear-gradient(135deg, #FF6B6B, #4ECDC4); color: #1a202c; text-decoration: none; border-radius: 999px; font-weight: 700; font-size: 0.9rem; transition: opacity 0.2s; }
+        .card-link:hover { opacity: 0.85; }
+
+        .empty { text-align: center; padding: 4rem 2rem; color: #718096; }
+        .empty .emoji { font-size: 4rem; margin-bottom: 1rem; }
+        .empty p { font-size: 1.1rem; margin: 0.5rem 0; }
+
+        footer { text-align: center; padding: 2rem 1rem; color: #718096; font-size: 0.9rem; border-top: 1px solid #2D3748; }
+        footer span { color: #FF6B6B; }
+
+        .hidden { display: none; }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.8rem; }
+            .grid { padding: 1.5rem 1rem; grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JohnnyPanel 🧭</h1>
+        <p>כל הפרויקטים של ג'וני צדקה</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('ours')">הפרויקטים שלנו 🏠</button>
+        <button class="tab" onclick="switchTab('others')">פרויקטים לאחרים 👥</button>
+    </div>
+
+    <div id="tab-ours" class="grid">
+        <div class="card">
+            <div class="card-emoji">📦</div>
+            <div class="card-name">PickPick</div>
+            <div class="card-desc">אפליקציית מעקב חבילות ומשלוחים</div>
+            <div class="status status-live">🟢 Live</div>
+            <div class="tech-tags"><span class="tech-tag">Next.js</span><span class="tech-tag">Azure</span><span class="tech-tag">TypeScript</span></div>
+            <a class="card-link" href="https://pickpick-app.azurewebsites.net" target="_blank">פתח →</a>
+        </div>
+        <div class="card">
+            <div class="card-emoji">₿</div>
+            <div class="card-name">BitoCoin</div>
+            <div class="card-desc">דשבורד קריפטו והזדמנויות ארביטראז'</div>
+            <div class="status status-live">🟢 Live</div>
+            <div class="tech-tags"><span class="tech-tag">Next.js</span><span class="tech-tag">Bybit API</span></div>
+            <a class="card-link" href="https://itziktdk.github.io/bitocoin/" target="_blank">פתח →</a>
+        </div>
+        <div class="card">
+            <div class="card-emoji">🔥</div>
+            <div class="card-name">Couple Dare Game</div>
+            <div class="card-desc">משחק זוגות — כמה אתם באמת מכירים?</div>
+            <div class="status status-live">🟢 Live</div>
+            <div class="tech-tags"><span class="tech-tag">Node.js</span><span class="tech-tag">Socket.io</span><span class="tech-tag">Azure</span></div>
+            <a class="card-link" href="https://couple-dare-game.azurewebsites.net" target="_blank">פתח →</a>
+        </div>
+        <div class="card">
+            <div class="card-emoji">🎉</div>
+            <div class="card-name">Party Game</div>
+            <div class="card-desc">מי הזוג הכי חם? — משחק ניקוד סודי</div>
+            <div class="status status-live">🟢 Live</div>
+            <div class="tech-tags"><span class="tech-tag">HTML/JS</span><span class="tech-tag">GitHub Pages</span></div>
+            <a class="card-link" href="https://itziktdk.github.io/party-game/" target="_blank">פתח →</a>
+        </div>
+        <div class="card">
+            <div class="card-emoji">📊</div>
+            <div class="card-name">PickPick Roadmap</div>
+            <div class="card-desc">תוכנית מוצר 2026-2027</div>
+            <div class="status status-protected">🔒 Protected</div>
+            <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">Password Protected</span></div>
+            <a class="card-link" href="https://itziktdk.github.io/pickpick-roadmap/" target="_blank">פתח →</a>
+        </div>
+        <div class="card">
+            <div class="card-emoji">📈</div>
+            <div class="card-name">Bybit Monitor</div>
+            <div class="card-desc">ניטור Funding Rates וקריפטו</div>
+            <div class="status status-backend">🟡 Backend Only</div>
+            <div class="tech-tags"><span class="tech-tag">TypeScript</span><span class="tech-tag">Bybit API</span></div>
+        </div>
+        <div class="card">
+            <div class="card-emoji">🔌</div>
+            <div class="card-name">MS365 MCP Server</div>
+            <div class="card-desc">חיבור ל-Microsoft 365 — מיילים, Teams, יומן</div>
+            <div class="status status-backend">🟡 Backend Only</div>
+            <div class="tech-tags"><span class="tech-tag">MCP Protocol</span><span class="tech-tag">Graph API</span></div>
+        </div>
+    </div>
+
+    <div id="tab-others" class="hidden">
+        <div class="empty">
+            <div class="emoji">🚀</div>
+            <p>עדיין אין פרויקטים לאחרים</p>
+            <p>הפרויקט הראשון יופיע כאן כשמישהו יבקש!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with <span>❤️</span> by Johnny Tzadaka 🧭</p>
+        <p>Product Manager @ PickPick | AI Assistant for Itzik Tzadaka</p>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', (tab === 'ours' && i === 0) || (tab === 'others' && i === 1));
+            });
+            document.getElementById('tab-ours').classList.toggle('hidden', tab !== 'ours');
+            document.getElementById('tab-others').classList.toggle('hidden', tab !== 'others');
+        }
+    </script>
+</body>
+</html>
